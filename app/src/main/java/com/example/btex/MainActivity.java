@@ -233,8 +233,13 @@ public class MainActivity extends AppCompatActivity {
                                     byte[] arr = new byte[input];
                                     mInputStream.read(arr);
                                     String str = new String(arr, StandardCharsets.UTF_8);
-                                    items.add(new LogData(str, sdate.format(date), 1));
+                                    String msg[] = str.split("\n");
+                                    int pos = items.size();
+                                    for (String message:msg) {
+                                        items.add(new LogData(message, sdate.format(date), 1));
+                                    }
                                     logAdapter.notifyDataSetChanged();
+                                    recordRecyclerView.scrollToPosition(items.size()-1);
                                     Log.d("hooo", str);
                                 }
                             }
